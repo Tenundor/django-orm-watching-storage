@@ -1,29 +1,7 @@
-from datacenter.models import Passcard
 from datacenter.models import Visit
 from django.shortcuts import render
 from django.utils.timezone import localtime
-
-
-def get_duration(visit):
-    """
-    Returns the time spent by an employee in the storage in seconds (int)
-
-    Parameters
-    ----------
-    visit : <class 'datacenter.models.Visit'>
-    """
-    entered_at_localtime = localtime(visit.entered_at)
-    current_localtime = localtime()
-    datetime_delta = current_localtime - entered_at_localtime
-
-    return int(datetime_delta.total_seconds())
-
-
-def format_duration(seconds):
-    mm = seconds // 60
-    hh, mm = divmod(mm, 60)
-
-    return '{0:02d}ч {1:02d}мин'.format(hh, mm)
+from duration import get_duration, format_duration, is_visit_long
 
 
 def storage_information_view(request):
@@ -34,7 +12,8 @@ def storage_information_view(request):
         visit_with_duration = {
             "who_entered": visit.passcard,
             "entered_at": localtime(visit.entered_at),
-            "duration": format_duration(duration_of_visit_seconds)
+            "duration": format_duration(duration_of_visit_seconds),
+            "is_strange": is_visit_long(visit)
         }
         non_closed_visits.append(visit_with_duration)
 
