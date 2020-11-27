@@ -32,9 +32,9 @@ cd django-orm-watching-storage
 ```sh 
 pip install -r requirements.txt
 ```
-Запустите `main.py`:
+Запустите сайт:
 ```sh
-python main.py
+python manage.py runserver 0.0.0.0:8000
 ```
 Откройте сайт в браузере по адресу [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
