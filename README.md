@@ -18,11 +18,7 @@ git clone https://github.com/Tenundor/django-orm-watching-storage
 ```
 В папке с проектом создайте файл `.env` и добавьте переменные окружения для доступа к базе данных:
 ```
-HOST='Host' 
-PORT='5434'
-NAME='Name'
-USER='User'
-PASSWORD='Password'
+DATABASE_URL = postgres://user:password@db.example.test:5434/name
 SECRET_KEY='Secret'
 DEBUG=False # Отключение отладочного режима
 ```
